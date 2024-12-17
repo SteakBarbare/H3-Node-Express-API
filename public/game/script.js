@@ -50,7 +50,6 @@ function getPokemon(direction, name) {
 }
 
 function createPokemon(direction, pokemonData) {
-  console.log(pokemonData);
   let tempStorage = new Pokemon(
     pokemonData.name,
     pokemonData.health,
@@ -81,16 +80,16 @@ function setHealthbar(pokemon, healthbar) {
 }
 
 getPokemon("Left", "Testifeu");
-getPokemon("Right", "Kipachu");
+getPokemon("Right", "MrFear");
 
 charge.addEventListener("click", () => {
-  if (rightPokemonInstance.speed > leftPokemonInstance.speed) {
+  if (rightPokemonInstance.speed < leftPokemonInstance.speed) {
     attackTarget(
       leftPokemon,
       rightPokemon,
       rightHealthbar,
-      rightPokemonInstance,
       leftPokemonInstance,
+      rightPokemonInstance,
       false,
       "Right"
     );
@@ -99,8 +98,8 @@ charge.addEventListener("click", () => {
       rightPokemon,
       leftPokemon,
       rightHealthbar,
-      leftPokemonInstance,
       rightPokemonInstance,
+      leftPokemonInstance,
       false,
       "Left"
     );
