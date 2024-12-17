@@ -21,6 +21,7 @@ class Pokemon {
   ) {
     this.name = name;
     this.health = health;
+    this.maxHealth = health;
     this.speed = speed;
     this.attack = attack;
     this.defense = defense;
@@ -64,31 +65,95 @@ function createPokemon(direction, pokemonData) {
   if (direction == "Left") {
     leftPokemonInstance = tempStorage;
     leftPokemon.src = "Images/" + leftPokemonInstance.image;
+    setHealthbar(leftPokemonInstance, leftHealthbar);
   } else {
     rightPokemonInstance = tempStorage;
     rightPokemon.src = "Images/" + rightPokemonInstance.image;
+    setHealthbar(rightPokemonInstance, rightHealthbar);
   }
 }
 
-getPokemon("Left", "Carapute");
+function setHealthbar(pokemon, healthbar) {
+  healthbar.innerHTML =
+    pokemon.name + ": " + pokemon.health + " / " + pokemon.maxHealth + " Hp";
+  healthbar.style.width =
+    String((pokemon.health / pokemon.maxHealth) * 100) + "px";
+}
+
+getPokemon("Left", "Testifeu");
 getPokemon("Right", "Kipachu");
 
-let kipachuLife = 100;
-
 charge.addEventListener("click", () => {
-  kipachuLife -= 20;
-  attackTarget(leftPokemon, rightPokemon, rightHealthbar, kipachuLife);
+  if (rightPokemonInstance.speed > leftPokemonInstance.speed) {
+    attackTarget(
+      leftPokemon,
+      rightPokemon,
+      rightHealthbar,
+      rightPokemonInstance,
+      leftPokemonInstance,
+      false,
+      "Right"
+    );
+  } else {
+    attackTarget(
+      rightPokemon,
+      leftPokemon,
+      rightHealthbar,
+      leftPokemonInstance,
+      rightPokemonInstance,
+      false,
+      "Left"
+    );
+  }
 });
 
-function attackTarget(attacker, target, targetLifeHTML, targetLife) {
-  attacker.style.left = "40%";
+function attackTarget(
+  attackerSprite,
+  targetSprite,
+  targetLifeHTML,
+  attacker,
+  target,
+  isCounterAttack,
+  direction
+) {
+  attackerSprite.style.left = "45%";
   setTimeout(() => {
-    attacker.style.left = "20%";
-    targetLifeHTML.innerHTML = "Kipachu: " + targetLife + "Hp";
-    targetLifeHTML.style.width = targetLife + "px";
-    target.style.opacity = 0;
+    target.health -= attacker.attack;
+    if (direction == "Right") {
+      attackerSprite.style.left = "20%";
+    } else {
+      attackerSprite.style.left = "65%";
+    }
+    targetLifeHTML.innerHTML =
+      target.name + ": " + target.health + " / " + target.maxHealth + " Hp";
+    targetLifeHTML.style.width =
+      String((target.health / target.maxHealth) * 100) + "px";
+    targetSprite.style.opacity = 0;
     setTimeout(() => {
-      target.style.opacity = 1;
+      targetSprite.style.opacity = 1;
+      if (!isCounterAttack) {
+        if (direction == "Right") {
+          attackTarget(
+            targetSprite,
+            attackerSprite,
+            leftHealthbar,
+            target,
+            attacker,
+            true,
+            "Left"
+          );
+        } else {
+          attackTarget(
+            targetSprite,
+            attackerSprite,
+            leftHealthbar,
+            target,
+            attacker,
+            true,
+            "Right"
+          );
+        }
+      }
     }, 250);
   }, 500);
 }
