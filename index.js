@@ -2,8 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = 3000;
-const pokemonByNameRouter = require("./routes/getPokemonByName.js");
+const pokemonByName = require("./routes/getPokemonByName.js");
 const allPokemons = require("./routes/getAllPokemons.js");
+const allTypes = require("./routes/getAllTypes.js");
+const typesInteractionById = require("./routes/getTypesInteractionById.js");
 
 const corsOptions = {
   origin: "*",
@@ -28,8 +30,10 @@ app.get("/unsouslien/", function (req, res) {
   res.send("Tornade de feur");
 });
 
-app.use("/getPokemonByName", pokemonByNameRouter);
+app.use("/getPokemonByName", pokemonByName);
 app.use("/allPokemons", allPokemons);
+app.use("/allTypes", allTypes);
+app.use("/getTypesInteractionById", typesInteractionById);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
