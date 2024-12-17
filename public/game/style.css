@@ -35,7 +35,7 @@ body {
   background-color: green;
 }
 
-.kipachu {
+.rightPokemon {
   width: 200px;
   position: absolute;
   top: 300px;
@@ -44,7 +44,7 @@ body {
   transition-timing-function: ease-in;
 }
 
-.carapute {
+.leftPokemon {
   width: 200px;
   position: absolute;
   top: 300px;
