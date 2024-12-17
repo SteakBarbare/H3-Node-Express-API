@@ -5,7 +5,7 @@ let con = mysql.createConnection({
   host: dbConfig.host,
   user: dbConfig.user,
   password: dbConfig.password,
-  database: dbConfig.database,
+  database: dbConfig.database
 });
 
 con.connect(function (err) {
@@ -17,7 +17,7 @@ con.connect(function (err) {
     ["Partout", 199],
     ["Nope", 20],
     ["Là", 2],
-    ["Peut être", 666],
+    ["Peut être", 666]
   ];
   con.query(sql, [values], function (err, result) {
     if (err) throw err;

@@ -2,12 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const port = 3000;
-const frangipaneRouter = require("./routes/frangipane.js");
+const pokemonByNameRouter = require("./routes/getPokemonByName.js");
 
 const corsOptions = {
   origin: "*",
   credentials: true,
-  optionSuccessStatus: 200,
+  optionSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
@@ -15,7 +15,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(
   express.urlencoded({
-    extended: true,
+    extended: true
   })
 );
 
@@ -27,7 +27,7 @@ app.get("/unsouslien/", function (req, res) {
   res.send("Tornade de feur");
 });
 
-app.use("/frangipane", frangipaneRouter);
+app.use("/getPokemonByName", pokemonByNameRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
