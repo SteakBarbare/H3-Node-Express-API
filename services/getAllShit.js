@@ -4,7 +4,7 @@ const config = require("../config.json");
 
 async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
-  const rows = await db.query(`SELECT * FROM types`);
+  const rows = await db.query(`SELECT * FROM shit`);
   const data = helper.emptyOrRows(rows);
   const meta = { page };
   return {
