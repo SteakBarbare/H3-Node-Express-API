@@ -4,16 +4,15 @@ const config = require("../config.json");
 
 async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
-  const rows = await db.query(`SELECT * FROM frangipane`);
+  const rows = await db.query(`SELECT * FROM pokemon`);
   const data = helper.emptyOrRows(rows);
   const meta = { page };
-
   return {
     data,
-    meta,
+    meta
   };
 }
 
 module.exports = {
-  getMultiple,
+  getMultiple
 };

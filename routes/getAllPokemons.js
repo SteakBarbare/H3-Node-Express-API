@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const frangipane = require("../services/frangipane.js");
+const pokemon = require("../services/getAllPokemons.js");
 
 router.get("/", async function (req, res, next) {
   try {
-    res.json(await frangipane.getMultiple(req.query.page));
+    res.json(await pokemon.getMultiple(req.query.page));
   } catch (err) {
-    console.error(`Error while getting my dear frangipane`, err.message);
+    console.error(`Error while getting Pokemon data`, err.message);
     next(err);
   }
 });

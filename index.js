@@ -3,6 +3,7 @@ const cors = require("cors");
 const app = express();
 const port = 3000;
 const pokemonByNameRouter = require("./routes/getPokemonByName.js");
+const allPokemons = require("./routes/getAllPokemons.js");
 
 const corsOptions = {
   origin: "*",
@@ -28,6 +29,7 @@ app.get("/unsouslien/", function (req, res) {
 });
 
 app.use("/getPokemonByName", pokemonByNameRouter);
+app.use("/allPokemons", allPokemons);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

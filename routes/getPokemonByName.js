@@ -2,13 +2,10 @@ const express = require("express");
 const router = express.Router();
 const pokemon = require("../services/getPokemonByName.js");
 
-router.get("/", async function (req, res, next) {
+router.get("/:name", async function (req, res, next) {
   try {
-    console.log("Pute");
-
-    res.json(await pokemon.getMultiple(req.query.page));
+    res.json(await pokemon.getMultiple(req.query.page, req.params.name));
   } catch (err) {
-    console.log("Bipute");
     console.error(`Error while getting Pokemon data`, err.message);
     next(err);
   }
