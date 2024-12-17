@@ -4,6 +4,9 @@ This is a simple Node Js, MySQL Express API made for back-end & fullstack classe
 
 ## Setup
 
+Before doing anything download the required packages. To do so open a terminal at the root folder and type this:
+> npm i
+
 First, you have to create at the root folder a new file named:
 
 > config.json
